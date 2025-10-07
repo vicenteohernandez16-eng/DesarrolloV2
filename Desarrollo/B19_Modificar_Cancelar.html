@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>B19: Modificar Pedido</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('https://images.unsplash.com/photo-1603046891445-122b98fbe106') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.container {
+  background-color: rgba(255,255,255,0.95);
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+}
+select, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+}
+button {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button:hover { background-color: #2ecc71; }
+.success { color: green; margin-top: 10px; }
+.error { color: red; margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h3>Modificar Pedido</h3>
+  <select id="nuevoProducto">
+    <option value="">Seleccionar nueva ensalada</option>
+    <option value="cesar">César</option>
+    <option value="mixta">Mixta</option>
+    <option value="vegana">Vegana</option>
+  </select>
+  <button id="modificarBtn">Guardar Cambios</button>
+  <p id="mensaje"></p>
+  <a href="index.html">Volver al inicio</a>
+</div>
+
+<script>
+document.getElementById('modificarBtn').addEventListener('click', () => {
+  const producto = document.getElementById('nuevoProducto').value;
+  const mensaje = document.getElementById('mensaje');
+  if (!producto) {
+    mensaje.textContent = "Seleccione una ensalada para modificar ❌";
+    mensaje.className = "error";
+  } else {
+    mensaje.textContent = "Pedido actualizado correctamente ✔️";
+    mensaje.className = "success";
+  }
+});
+</script>
+</body>
+</html>

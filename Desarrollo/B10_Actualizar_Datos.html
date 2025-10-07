@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Actualizar Datos - Fresh Bowl</title>
+<style>
+body { font-family:'Poppins',sans-serif; background:#f9f9f9; margin:0; }
+header { background:#fff; padding:10px 40px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 8px rgba(0,0,0,0.1); position:sticky; top:0; }
+.simulacion-box { background:white; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); width:300px; margin:50px auto; text-align:left; }
+.simulacion-box input { width:100%; padding:8px; margin-bottom:8px; border:1px solid #ccc; border-radius:6px; }
+.simulacion-box button { width:100%; padding:10px; border:none; border-radius:6px; background:#4CAF50; color:white; font-weight:bold; cursor:pointer; }
+.simulacion-msg { margin-top:10px; color:#388E3C; font-weight:bold; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><h1>Fresh Bowl</h1></div>
+</header>
+
+<section class="simulaciones">
+  <h2>📝 Actualización de Datos Personales</h2>
+  <div class="simulacion-box">
+    <label>Nombre:</label>
+    <input type="text" id="nombre" placeholder="Nuevo nombre">
+    <label>Correo:</label>
+    <input type="email" id="email" placeholder="Nuevo correo">
+    <label>Teléfono:</label>
+    <input type="text" id="telefono" placeholder="Nuevo teléfono">
+    <button onclick="actualizar()">Guardar cambios</button>
+    <div class="simulacion-msg" id="msg"></div>
+  </div>
+</section>
+
+<script>
+function actualizar() {
+  const email = document.getElementById('email').value;
+  const tel = document.getElementById('telefono').value;
+  const msg = document.getElementById('msg');
+  const emailValido = /\S+@\S+\.\S+/.test(email);
+  const telValido = /^\d{8,12}$/.test(tel);
+  if(emailValido && telValido) {
+    msg.style.color = "#388E3C";
+    msg.textContent = "Información actualizada correctamente";
+  } else {
+    msg.style.color = "#f44336";
+    msg.textContent = "Error: correo o teléfono inválido";
+  }
+}
+</script>
+
+</body>
+</html>

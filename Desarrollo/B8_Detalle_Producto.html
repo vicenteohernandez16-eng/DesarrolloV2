@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detalle Producto - Ensalada César</title>
+<style>
+  body { margin:0; font-family:'Poppins', sans-serif; background-color:#f9f9f9; color:#333; }
+  header { background-color:#fff; display:flex; align-items:center; justify-content:space-between; padding:10px 40px; box-shadow:0 2px 8px rgba(0,0,0,0.1); position:sticky; top:0; z-index:100; }
+  .logo { display:flex; align-items:center; gap:10px; }
+  .logo img { height:60px; border-radius:50%; }
+  .logo h1 { font-size:1.6em; color:#4CAF50; }
+  nav ul { list-style:none; display:flex; gap:25px; margin:0; padding:0; }
+  nav a { text-decoration:none; color:#333; font-weight:600; transition:color 0.3s; }
+  nav a:hover { color:#4CAF50; }
+  .nav-buttons { display:flex; align-items:center; gap:15px; position:relative; }
+  .nav-buttons a { background-color:#4CAF50; color:white; padding:8px 14px; border-radius:8px; text-decoration:none; font-weight:bold; transition:background-color 0.3s; }
+  .nav-buttons a:hover { background-color:#388E3C; }
+  .carrito { font-weight:bold; cursor:pointer; }
+  .perfil { position:relative; }
+  .perfil-menu { display:none; position:absolute; top:55px; right:0; background-color:white; border:1px solid #ccc; border-radius:8px; width:150px; box-shadow:0 4px 10px rgba(0,0,0,0.1); z-index:200; }
+  .perfil-menu a { display:block; padding:10px; color:#333; text-decoration:none; }
+  .perfil-menu a:hover { background-color:#f1f1f1; }
+
+  /* DETALLE PRODUCTO */
+  .container { max-width:900px; margin:40px auto; padding:0 20px; }
+  .producto-detalle { display:flex; flex-wrap:wrap; gap:30px; background:white; padding:20px; border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
+  .producto-detalle img { width:100%; max-width:400px; border-radius:15px; object-fit:cover; }
+  .detalle-info { flex:1; }
+  .detalle-info h2 { color:#4CAF50; font-size:1.8em; margin-bottom:15px; }
+  .detalle-info p { font-size:1.1em; margin-bottom:20px; }
+  .detalle-info button { background:#4CAF50; color:white; border:none; padding:12px 20px; border-radius:8px; cursor:pointer; font-weight:bold; transition:background 0.3s; }
+  .detalle-info button:hover { background:#388E3C; }
+  .no-disponible { font-size:1.2em; color:red; font-weight:bold; }
+
+  /* CARRITO */
+  #lista-carrito div { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+  #lista-carrito span.qty { font-weight:bold; margin:0 5px; }
+  #lista-carrito button { padding:2px 6px; font-size:0.9em; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="https://i.pinimg.com/originals/9f/65/3f/9f653f870d7eda5e3d7068f9ef45fccc.jpg" alt="Fresh Bowl Logo">
+    <h1>Fresh Bowl</h1>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html#productos">Productos</a></li>
+      <li><a href="index.html#top">Top Ensaladas</a></li>
+      <li><a href="index.html#bebidas">Bebidas</a></li>
+    </ul>
+  </nav>
+  <div class="nav-buttons">
+    <a href="B1_registro.html">Registro</a>
+    <a href="B4_Inicio_Sesion.html">Iniciar Sesión</a>
+    <div class="perfil" id="perfil-btn">Perfil ▼
+      <div class="perfil-menu" id="perfil-menu">
+        <a href="B33_Ver_Perfil.html">Ver Perfil</a>
+        <a href="B11_Historial.html">Historial de pedidos</a>
+        <a href="B25_Estado_Pedido.html">Puntos</a>
+      </div>
+    </div>
+    <div class="carrito" id="carrito">🛒 $0</div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="producto-detalle">
+    <img src="https://polvillo.es/wp-content/uploads/2021/05/receta-de-ensalada-cesar-con-barrita-campesina.jpg" alt="Ensalada César">
+    <div class="detalle-info">
+      <h2>Ensalada César</h2>
+      <p>Deliciosa ensalada con pollo, lechuga, queso parmesano y crutones frescos.</p>
+      <div id="accion-producto"></div>
+    </div>
+  </div>
+
+  <!-- CARRITO DETALLE (puede estar oculto si quieres solo en index) -->
+  <div id="lista-carrito"></div>
+  <p>Subtotal: <span id="subtotal-value">$0</span></p>
+  <p>Envío: <span id="shipping-value">$0</span></p>
+  <p>Total: <span id="total-value">$0</span></p>
+</div>
+
+<script>
+  // PERFIL
+  const perfilBtn = document.getElementById('perfil-btn');
+  const perfilMenu = document.getElementById('perfil-menu');
+  perfilBtn.addEventListener('click', () => {
+    perfilMenu.style.display = perfilMenu.style.display === 'block' ? 'none' : 'block';
+  });
+  document.addEventListener('click', (e) => { if(!perfilBtn.contains(e.target)) perfilMenu.style.display='none'; });
+
+  // STOCK DEL PRODUCTO
+  const stock = 5; // cambiar a 0 para probar agotado
+  const accionProducto = document.getElementById('accion-producto');
+  const carrito = document.getElementById('carrito');
+
+  // FUNCIONES DE CARRITO
+  function addToCart(productId, price) {
+    let itemEl = document.getElementById(productId);
+    if(!itemEl) {
+      const lista = document.getElementById('lista-carrito');
+      itemEl = document.createElement('div');
+      itemEl.id = productId;
+      itemEl.innerHTML = `
+        <span>${productId.replaceAll("_"," ")} x <span class="qty">1</span></span>
+        <button onclick="updateQty('${productId}',1,${price})">+</button>
+        <button onclick="updateQty('${productId}',-1,${price})">-</button>
+        <button onclick="removeItem('${productId}')">Eliminar</button>
+      `;
+      lista.appendChild(itemEl);
+    } else {
+      const qtyEl = itemEl.querySelector('.qty');
+      qtyEl.textContent = parseInt(qtyEl.textContent)+1;
+    }
+    updateCartTotal();
+  }
+
+  function updateQty(productId, delta, price) {
+    const itemEl = document.getElementById(productId);
+    const qtyEl = itemEl.querySelector('.qty');
+    let qty = parseInt(qtyEl.textContent);
+    qty = Math.max(0, qty + delta);
+    qtyEl.textContent = qty;
+    if(qty===0) itemEl.style.display='none';
+    updateCartTotal();
+  }
+
+  function removeItem(productId) {
+    const itemEl = document.getElementById(productId);
+    itemEl.style.display='none';
+    updateCartTotal();
+  }
+
+  function updateCartTotal() {
+    const items = document.querySelectorAll('#lista-carrito > div');
+    let subtotal=0, totalItems=0;
+    items.forEach(item=>{
+      if(item.style.display!=='none'){
+        const qty = parseInt(item.querySelector('.qty').textContent);
+        const price = parseInt(item.querySelector('button').getAttribute('onclick').match(/,\s*(\d+)\)/)[1]);
+        subtotal += qty*price;
+        totalItems += qty;
+      }
+    });
+    const shipping = totalItems>0?2500:0;
+    const total = subtotal+shipping;
+    document.getElementById('subtotal-value').textContent = '$'+subtotal.toLocaleString('es-CL');
+    document.getElementById('shipping-value').textContent = '$'+shipping.toLocaleString('es-CL');
+    document.getElementById('total-value').textContent = '$'+total.toLocaleString('es-CL');
+    carrito.textContent = `🛒 $${total.toLocaleString('es-CL')}`;
+  }
+
+  // Mostrar botón o mensaje según stock
+  if(stock>0){
+    const btn = document.createElement('button');
+    btn.textContent='Agregar al carrito';
+    btn.onclick = ()=>addToCart('Ensalada_Cesar',12000);
+    accionProducto.appendChild(btn);
+  } else {
+    const msg = document.createElement('div')
+  }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>B-36 Preferencias</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://assets.elgourmet.com/wp-content/uploads/2023/06/ensalada-rusa-3.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    background-color: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+  }
+  select, button {
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  button {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover { background-color: #2ecc71; }
+  .error { color: red; }
+  .success { color: green; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h3>Preferencias del Usuario</h3>
+  <select id="tema">
+    <option value="">Seleccionar tema</option>
+    <option value="claro">Modo Claro</option>
+    <option value="oscuro">Modo Oscuro</option>
+  </select>
+  <select id="notificaciones">
+    <option value="">Notificaciones</option>
+    <option value="si">Activadas</option>
+    <option value="no">Desactivadas</option>
+  </select>
+  <button id="guardar">Guardar Preferencias</button>
+  <p id="mensaje"></p>
+  <a href="index.html">Volver al inicio</a>
+</div>
+
+<script>
+document.getElementById('guardar').addEventListener('click', ()=>{
+  const tema = document.getElementById('tema').value;
+  const notif = document.getElementById('notificaciones').value;
+  const msg = document.getElementById('mensaje');
+
+  if(!tema || !notif){
+    msg.textContent = "Selecciona ambas preferencias.";
+    msg.className = "error";
+  } else if(tema === "oscuro" && notif === "no"){
+    msg.textContent = "Configuración inválida: Modo oscuro requiere notificaciones activadas.";
+    msg.className = "error";
+  } else {
+    msg.textContent = "Preferencias guardadas correctamente.";
+    msg.className = "success";
+  }
+});
+</script>
+</body>
+</html>

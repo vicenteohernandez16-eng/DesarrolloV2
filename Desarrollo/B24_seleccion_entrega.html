@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>B24: Selección de Entrega</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    background-color: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+  }
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  button {
+    background-color: #e67e22;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+  }
+  button:hover { background-color: #f39c12; }
+  .success { color: green; margin-top: 10px; }
+  .error { color: red; margin-top: 10px; }
+  a { color: #e67e22; font-weight: bold; display: inline-block; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h3>Selección de Entrega</h3>
+  <select id="tipoEntrega">
+    <option value="">Seleccionar</option>
+    <option value="delivery">Delivery</option>
+    <option value="retiro">Retiro en local</option>
+  </select>
+  <input type="text" id="direccion" placeholder="Dirección (solo para Delivery)">
+  <button id="confirmarEntrega">Confirmar</button>
+  <p id="mensaje"></p>
+  <a href="index.html">Volver al inicio</a>
+</div>
+
+<script>
+const tipo = document.getElementById('tipoEntrega');
+const dir = document.getElementById('direccion');
+const msg = document.getElementById('mensaje');
+
+document.getElementById('confirmarEntrega').addEventListener('click', () => {
+  if (tipo.value === "delivery") {
+    if (dir.value.trim().length < 5) {
+      msg.textContent = "Dirección inválida ❌";
+      msg.className = "error";
+    } else {
+      msg.textContent = "Pedido agendado para entrega a domicilio ✔️";
+      msg.className = "success";
+    }
+  } else if (tipo.value === "retiro") {
+    msg.textContent = "Pedido confirmado para retiro en local 🏪";
+    msg.className = "success";
+  } else {
+    msg.textContent = "Selecciona una opción de entrega";
+    msg.className = "error";
+  }
+});
+</script>
+</body>
+</html>

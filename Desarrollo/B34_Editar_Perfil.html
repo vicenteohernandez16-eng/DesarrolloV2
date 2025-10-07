@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>B-34 Editar Perfil</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://www.recetasnestle.cl/sites/default/files/styles/recipe_detail_desktop/public/2022-10/ensalada-pollo-verde.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    background-color: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+  }
+  input, button {
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  button {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover { background-color: #2ecc71; }
+  .error { color: red; }
+  .success { color: green; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h3>Editar Perfil</h3>
+  <input type="text" id="nombre" placeholder="Nombre completo">
+  <input type="email" id="email" placeholder="Correo electrónico">
+  <input type="text" id="telefono" placeholder="Teléfono">
+  <button id="guardar">Guardar cambios</button>
+  <p id="mensaje"></p>
+  <a href="index.html">Volver al inicio</a>
+</div>
+
+<script>
+document.getElementById('guardar').addEventListener('click', ()=>{
+  const nombre = document.getElementById('nombre').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const telefono = document.getElementById('telefono').value.trim();
+  const msg = document.getElementById('mensaje');
+
+  if(!nombre || !email || !telefono){
+    msg.textContent = "Por favor completa todos los campos.";
+    msg.className = "error";
+  } else {
+    msg.textContent = "Datos actualizados correctamente.";
+    msg.className = "success";
+  }
+});
+</script>
+</body>
+</html>

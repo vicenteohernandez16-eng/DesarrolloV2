@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>B29: Alertas de Agotamiento</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    background-color: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+    width: 350px;
+  }
+  input { width: 100%; padding: 8px; margin-top: 10px; }
+  button {
+    background-color: #d35400;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  button:hover { background-color: #e67e22; }
+  .alerta { color: red; font-weight: bold; margin-top: 10px; }
+  .ok { color: green; margin-top: 10px; }
+  a { color: #d35400; display: inline-block; margin-top: 15px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h3>Alertas de Agotamiento</h3>
+  <input type="number" id="stock" placeholder="Stock actual del ingrediente">
+  <button id="verificar">Actualizar Inventario</button>
+  <p id="mensaje"></p>
+  <a href="index.html">Volver al inicio</a>
+</div>
+
+<script>
+document.getElementById('verificar').addEventListener('click', ()=>{
+  const valor = parseInt(document.getElementById('stock').value);
+  const msg = document.getElementById('mensaje');
+  if (isNaN(valor)) {
+    msg.textContent = "Ingrese un valor numérico válido.";
+    msg.className = "alerta";
+  } else if (valor < 5) {
+    msg.textContent = "⚠️ Stock bajo: se genera alerta de agotamiento.";
+    msg.className = "alerta";
+  } else {
+    msg.textContent = "✅ Sin alerta, stock suficiente.";
+    msg.className = "ok";
+  }
+});
+</script>
+</body>
+</html>

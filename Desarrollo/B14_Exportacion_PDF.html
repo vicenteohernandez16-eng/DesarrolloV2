@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>B14: Filtrar Productos</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('https://images.unsplash.com/photo-1565958011705-44e21171d1f6') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.container {
+  background-color: rgba(255,255,255,0.95);
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+}
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+}
+button {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  margin-top: 10px;
+}
+button:hover { background-color: #2ecc71; }
+.productos {
+  margin-top: 15px;
+}
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h3>Filtrar Productos</h3>
+  <select id="filtro">
+    <option value="todos">Todos</option>
+    <option value="ensalada">Ensaladas</option>
+    <option value="bebida">Bebidas</option>
+  </select>
+  <button id="filtrarBtn">Aplicar Filtro</button>
+  <div id="productos" class="productos"></div>
+  <a href="index.html">Volver al inicio</a>
+</div>
+
+<script>
+const productos = [
+  { nombre: "Ensalada César", tipo: "ensalada" },
+  { nombre: "Ensalada Vegana", tipo: "ensalada" },
+  { nombre: "Jugo Natural", tipo: "bebida" },
+  { nombre: "Agua Mineral", tipo: "bebida" }
+];
+
+const filtro = document.getElementById('filtro');
+const contenedor = document.getElementById('productos');
+
+function mostrarProductos(lista) {
+  contenedor.innerHTML = "";
+  lista.forEach(p => {
+    const div = document.createElement('div');
+    div.className = "card";
+    div.textContent = p.nombre;
+    contenedor.appendChild(div);
+  });
+}
+
+document.getElementById('filtrarBtn').addEventListener('click', () => {
+  const tipo = filtro.value;
+  if (tipo === "todos") mostrarProductos(productos);
+  else mostrarProductos(productos.filter(p => p.tipo === tipo));
+});
+
+mostrarProductos(productos);
+</script>
+</body>
+</html>

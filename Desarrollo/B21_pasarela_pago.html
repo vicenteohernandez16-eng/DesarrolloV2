@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>B21: Pasarela de Pago</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://images.unsplash.com/photo-1612874742935-6b0f8c5a4e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8cGFnb3xlbnwwfHx8fDE2OTc4ODUyMjc&ixlib=rb-4.0.3&q=80&w=1080') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    background-color: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+  }
+
+  input[type="text"], input[type="number"], input[type="month"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  button {
+    background-color: #27ae60;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 5px;
+  }
+
+  button:hover {
+    background-color: #2ecc71;
+  }
+
+  .error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+  }
+
+  .success {
+    color: green;
+    font-size: 0.9em;
+    margin-top: 5px;
+  }
+
+  a {
+    display: inline-block;
+    margin-top: 15px;
+    color: #27ae60;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h3>Pasarela de Pago</h3>
+
+  <input type="text" id="numeroTarjeta" placeholder="Número de tarjeta">
+  <input type="text" id="cvv" placeholder="CVV">
+  <input type="month" id="fechaExp" placeholder="Fecha expiración">
+  <button id="confirmarPago">Confirmar Pago</button>
+  <p id="mensajePago" class="error"></p>
+
+  <a href="index.html">Volver al inicio</a>
+</div>
+
+<script>
+const numeroTarjeta = document.getElementById('numeroTarjeta');
+const cvv = document.getElementById('cvv');
+const fechaExp = document.getElementById('fechaExp');
+const confirmarBtn = document.getElementById('confirmarPago');
+const mensajePago = document.getElementById('mensajePago');
+
+confirmarBtn.addEventListener('click', () => {
+  const num = numeroTarjeta.value.trim();
+  const cvvVal = cvv.value.trim();
+  const fecha = fechaExp.value.trim();
+
+  if(num === "" || cvvVal === "" || fecha === "") {
+    mensajePago.textContent = "Completa todos los campos";
+    mensajePago.className = "error";
+    return;
+  }
+
+  // Simulación de validación
+  if(num === "1234567890123456" && cvvVal === "123") {
+    mensajePago.textContent = "Pago aprobado ✔️";
+    mensajePago.className = "success";
+  } else {
+    mensajePago.textContent = "Pago rechazado ❌ Datos incorrectos";
+    mensajePago.className = "error";
+  }
+});
+</script>
+
+</body>
+</html>

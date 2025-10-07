@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>B-4 Inicio Seguro</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://www.panchovilla.cl/wp-content/uploads/2022/08/Ensalada-de-camaron-y-palta.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    background-color: rgba(255,255,255,0.9);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+  }
+
+  input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  button {
+    background-color: #27ae60;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 5px;
+  }
+
+  button:hover {
+    background-color: #2ecc71;
+  }
+
+  .error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+  }
+
+  .success {
+    color: green;
+    font-size: 0.9em;
+    margin-top: 5px;
+  }
+
+  a, .recuperar {
+    display: inline-block;
+    margin-top: 15px;
+    color: #27ae60;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  a:hover, .recuperar:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h3>Inicio Seguro</h3>
+  <input type="text" id="email" placeholder="Email">
+  <input type="password" id="pass" placeholder="Contraseña">
+  <button id="ingresar">Ingresar</button>
+  <p id="mensaje"></p>
+  <a href="index.html">Volver al inicio</a> |
+  <span class="recuperar" id="recuperar">Recuperar contraseña</span>
+</div>
+
+<script>
+const emailInput = document.getElementById('email');
+const passInput = document.getElementById('pass');
+const ingresarBtn = document.getElementById('ingresar');
+const mensaje = document.getElementById('mensaje');
+const recuperarBtn = document.getElementById('recuperar');
+
+ingresarBtn.addEventListener('click', () => {
+  const email = emailInput.value.trim();
+  const pass = passInput.value.trim();
+
+  if(email === "" || pass === ""){
+    mensaje.textContent = "Completa email y contraseña";
+    mensaje.className = "error";
+    return;
+  }
+
+// ADMIN
+if(email === "admin@example.com" && pass === "admin"){
+  mensaje.textContent = "Has iniciado sesión como ADMIN";
+  mensaje.className = "success";
+  setTimeout(() => {
+    window.location.href = "index.html"; // o "admin_panel.html" si quieres un panel de admin
+  }, 1500); // 1.5 segundos
+  return;
+}
+
+
+  // CLIENTE REGISTRADO
+  if(email === "cliente3@example.com" && pass === "444"){
+    mensaje.textContent = "Has iniciado sesión";
+    mensaje.className = "success";
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 1500);
+  } else {
+    mensaje.textContent = "Email o contraseña incorrecta";
+    mensaje.className = "error";
+  }
+});
+
+// Botón para ir a recuperar contraseña
+recuperarBtn.addEventListener('click', () => {
+  window.location.href = "B3_Recuperar_Contraseña.html";
+});
+</script>
+</body>
+</html>

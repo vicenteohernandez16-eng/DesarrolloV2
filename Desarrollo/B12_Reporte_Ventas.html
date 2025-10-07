@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporte de Ventas - Fresh Bowl</title>
+<style>
+body { font-family:'Poppins',sans-serif; background:#f9f9f9; margin:0; }
+header { background:#fff; padding:10px 40px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 8px rgba(0,0,0,0.1); position:sticky; top:0; }
+.simulacion-box { background:white; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); width:320px; margin:50px auto; text-align:left; }
+.simulacion-box input { width:100%; padding:8px; margin-bottom:8px; border:1px solid #ccc; border-radius:6px; }
+.simulacion-box button { width:100%; padding:10px; border:none; border-radius:6px; background:#4CAF50; color:white; font-weight:bold; cursor:pointer; margin-top:5px; }
+.simulacion-msg { margin-top:10px; color:#388E3C; font-weight:bold; }
+.reporte { margin-top:15px; border-top:1px solid #ccc; padding-top:10px; }
+.reporte p { margin:5px 0; }
+</style>
+</head>
+<body>
+
+<header><div class="logo"><h1>Fresh Bowl</h1></div></header>
+
+<section class="simulaciones">
+  <h2>📊 Reporte de Ventas</h2>
+  <div class="simulacion-box">
+    <label>Fecha inicio:</label>
+    <input type="date" id="inicio">
+    <label>Fecha fin:</label>
+    <input type="date" id="fin">
+    <button onclick="generarReporte()">Generar Reporte</button>
+    <div class="simulacion-msg" id="msg"></div>
+    <div class="reporte" id="reporte"></div>
+  </div>
+</section>
+
+<script>
+function generarReporte() {
+  const inicio = document.getElementById('inicio').value;
+  const fin = document.getElementById('fin').value;
+  const msg = document.getElementById('msg');
+  const reporte = document.getElementById('reporte');
+  reporte.innerHTML = "";
+  
+  if(!inicio || !fin) {
+    msg.style.color="#f44336";
+    msg.textContent = "Debe seleccionar un rango de fechas";
+    return;
+  }
+  
+  msg.style.color="#388E3C";
+  msg.textContent = "Reporte generado correctamente";
+  
+  // Simulación de ventas
+  const ventas = [
+    {producto:"Ensalada César", cantidad:10, categoria:"Clásicas"},
+    {producto:"Ensalada Tropical", cantidad:7, categoria:"Frutales"},
+    {producto:"Ensalada Rusa", cantidad:5, categoria:"Clásicas"},
+  ];
+  
+  ventas.forEach(v => {
+    const p = document.createElement('p');
+    p.textContent = `${v.producto} (${v.categoria}) - ${v.cantidad} ventas`;
+    reporte.appendChild(p);
+  });
+}
+</script>
+
+</body>
+</html>

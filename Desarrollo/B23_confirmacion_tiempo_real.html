@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>B23: Confirmación en Tiempo Real</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://images.unsplash.com/photo-1611765083444-a1d1bbf8d92a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    background-color: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+  }
+
+  button {
+    background-color: #27ae60;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+  }
+
+  button:hover {
+    background-color: #2ecc71;
+  }
+
+  .status {
+    margin-top: 15px;
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+  .success { color: green; }
+  .pending { color: orange; }
+
+  a { display: inline-block; margin-top: 15px; color: #27ae60; text-decoration: none; font-weight: bold; }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h3>Confirmación en Tiempo Real</h3>
+  <button id="confirmarPago">Realizar Pago</button>
+  <p id="estado" class="status"></p>
+  <a href="index.html">Volver al inicio</a>
+</div>
+
+<script>
+const btn = document.getElementById('confirmarPago');
+const estado = document.getElementById('estado');
+
+btn.addEventListener('click', () => {
+  estado.textContent = "Procesando...";
+  estado.className = "status pending";
+  
+  setTimeout(() => {
+    const demora = Math.random();
+    if (demora < 0.5) {
+      estado.textContent = "Pago confirmado ✔️";
+      estado.className = "status success";
+    } else {
+      estado.textContent = "Pago en proceso ⏳";
+      estado.className = "status pending";
+    }
+  }, 2000);
+});
+</script>
+
+</body>
+</html>

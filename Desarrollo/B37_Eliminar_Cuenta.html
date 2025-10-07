@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>B-37 Eliminar Cuenta</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://cdn0.recetasgratis.net/es/posts/7/9/7/ensalada_de_pollo_y_manzana_75797_600_square.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    background-color: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+  }
+  button {
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .eliminar { background-color: #e74c3c; color: white; }
+  .cancelar { background-color: #27ae60; color: white; }
+  .eliminar:hover { background-color: #c0392b; }
+  .cancelar:hover { background-color: #2ecc71; }
+  .success { color: green; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h3>Eliminar Cuenta</h3>
+  <p>¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.</p>
+  <button class="eliminar" id="confirmar">Eliminar Cuenta</button>
+  <button class="cancelar" id="cancelar">Cancelar</button>
+  <p id="mensaje"></p>
+  <a href="index.html">Volver al inicio</a>
+</div>
+
+<script>
+document.getElementById('confirmar').addEventListener('click', ()=>{
+  document.getElementById('mensaje').textContent = "Cuenta eliminada permanentemente.";
+  document.getElementById('mensaje').className = "success";
+});
+document.getElementById('cancelar').addEventListener('click', ()=>{
+  document.getElementById('mensaje').textContent = "Eliminación cancelada. Tu cuenta sigue activa.";
+  document.getElementById('mensaje').className = "success";
+});
+</script>
+</body>
+</html>

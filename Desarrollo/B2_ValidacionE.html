@@ -1,0 +1,111 @@
+<!-- Archivo: B2_ValidacionE.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>B-2 Validación Email</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('https://www.panchovilla.cl/wp-content/uploads/2022/08/Ensalada-de-camaron-y-palta.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: rgba(255,255,255,0.9);
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #27ae60;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      margin-top: 5px;
+    }
+
+    button:hover {
+      background-color: #2ecc71;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+
+    .success {
+      color: green;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 15px;
+      color: #27ae60;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h3>Confirmación de Email</h3>
+    <p id="mensajeEmail">Se envió un código de activación a <strong>cliente1@example.com</strong></p>
+    <input type="text" id="codigo" placeholder="Código de activación">
+    <button id="verificar">Activar cuenta</button>
+    <p id="mensaje" class="error"></p>
+    <a href="index.html">Volver al inicio</a>
+  </div>
+
+  <script>
+    const codigoInput = document.getElementById('codigo');
+    const verificarBtn = document.getElementById('verificar');
+    const mensaje = document.getElementById('mensaje');
+
+    verificarBtn.addEventListener('click', () => {
+      const codigo = codigoInput.value.trim();
+
+      if(codigo === "atun"){
+        mensaje.textContent = "Cuenta activada correctamente";
+        mensaje.className = "success";
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1500);
+      } else {
+        mensaje.textContent = "Código incorrecto";
+        mensaje.className = "error";
+      }
+    });
+  </script>
+</body>
+</html>

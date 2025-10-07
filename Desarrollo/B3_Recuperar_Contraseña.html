@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>B-3 Recuperar Contraseña</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://www.panchovilla.cl/wp-content/uploads/2022/08/Ensalada-de-camaron-y-palta.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    background-color: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+  }
+
+  input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  button {
+    background-color: #27ae60;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 5px;
+  }
+
+  button:hover {
+    background-color: #2ecc71;
+  }
+
+  .error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+  }
+
+  .success {
+    color: green;
+    font-size: 0.9em;
+    margin-top: 5px;
+  }
+
+  a {
+    display: inline-block;
+    margin-top: 15px;
+    color: #27ae60;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h3>Recuperar Contraseña</h3>
+  <p id="mensajeEnvio" class="success">Se ha enviado un código de verificación a ******@example.com</p>
+
+  <!-- Paso 1: ingresar código -->
+  <div id="codigoSection">
+    <input type="text" id="codigo" placeholder="Código de verificación">
+    <button id="verificar">Verificar código</button>
+    <p id="mensajeCodigo" class="error"></p>
+  </div>
+
+  <!-- Paso 2: nueva contraseña -->
+  <div id="nuevaPassSection" class="hidden">
+    <input type="password" id="nuevaPass" placeholder="Nueva contraseña">
+    <input type="password" id="repetirPass" placeholder="Reescribe la nueva contraseña">
+    <button id="cambiarPass">Cambiar contraseña</button>
+    <p id="mensajePass" class="error"></p>
+  </div>
+
+  <a href="index.html">Volver al inicio</a>
+</div>
+
+<script>
+const codigoInput = document.getElementById('codigo');
+const verificarBtn = document.getElementById('verificar');
+const mensajeCodigo = document.getElementById('mensajeCodigo');
+
+const nuevaPassSection = document.getElementById('nuevaPassSection');
+const nuevaPassInput = document.getElementById('nuevaPass');
+const repetirPassInput = document.getElementById('repetirPass');
+const cambiarPassBtn = document.getElementById('cambiarPass');
+const mensajePass = document.getElementById('mensajePass');
+
+verificarBtn.addEventListener('click', () => {
+  const codigo = codigoInput.value.trim();
+  if(codigo === "000") {
+    mensajeCodigo.textContent = "";
+    // Mostrar sección de nueva contraseña
+    document.getElementById('codigoSection').classList.add('hidden');
+    nuevaPassSection.classList.remove('hidden');
+  } else {
+    mensajeCodigo.textContent = "Código incorrecto";
+  }
+});
+
+cambiarPassBtn.addEventListener('click', () => {
+  const nueva = nuevaPassInput.value.trim();
+  const repetir = repetirPassInput.value.trim();
+
+  if(nueva === "" || repetir === "") {
+    mensajePass.textContent = "Completa ambos campos";
+    return;
+  }
+
+  if(nueva !== repetir) {
+    mensajePass.textContent = "Las contraseñas no coinciden";
+    return;
+  }
+
+  // Contraseña cambiada correctamente
+  mensajePass.textContent = "Contraseña cambiada correctamente";
+  mensajePass.className = "success";
+  setTimeout(() => {
+    window.location.href = "index.html";
+  }, 1500);
+});
+</script>
+</body>
+</html>

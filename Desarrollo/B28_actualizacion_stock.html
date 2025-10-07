@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>B28: Actualización de Stock</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://images.unsplash.com/photo-1600718371802-9b3cf53f5d99?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    background-color: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+    width: 400px;
+  }
+  input { width: 100%; padding: 8px; margin: 5px 0; }
+  button {
+    background-color: #c0392b;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+  }
+  button:hover { background-color: #e74c3c; }
+  .success { color: green; margin-top: 10px; }
+  a { color: #c0392b; display: inline-block; margin-top: 15px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h3>Actualización de Stock</h3>
+  <input type="number" id="nuevoStock" placeholder="Nuevo lote recibido">
+  <input type="number" id="nuevoPrecio" placeholder="Nuevo precio por unidad">
+  <button id="actualizar">Guardar Cambios</button>
+  <p id="mensaje"></p>
+  <a href="index.html">Volver al inicio</a>
+</div>
+
+<script>
+document.getElementById('actualizar').addEventListener('click', ()=>{
+  const stock = document.getElementById('nuevoStock').value;
+  const precio = document.getElementById('nuevoPrecio').value;
+  const msg = document.getElementById('mensaje');
+  if(stock || precio){
+    msg.textContent = "Inventario actualizado correctamente ✔️";
+    msg.className = "success";
+  } else {
+    msg.textContent = "Ingrese al menos un cambio para guardar.";
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top Ensaladas - Fresh Bowl</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body { font-family:'Poppins',sans-serif; background:#f9f9f9; margin:0; }
+header { background:#fff; padding:10px 40px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 8px rgba(0,0,0,0.1); position:sticky; top:0; }
+.chart-container { width:90%; max-width:800px; margin:50px auto; background:white; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+h2 { text-align:center; color:#388E3C; }
+</style>
+</head>
+<body>
+
+<header><div class="logo"><h1>Fresh Bowl</h1></div></header>
+
+<section class="chart-container">
+  <h2>🥇 Top Ensaladas - Unidades Vendidas 🥇</h2>
+  <canvas id="topEnsaladas"></canvas>
+</section>
+
+<script>
+const ctx = document.getElementById('topEnsaladas').getContext('2d');
+const topChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Caprese', 'Griega', 'Niçoise', 'Mediterránea', 'César', 'Tropical', 'Mimosa', 'Waldorf', 'Rusa'],
+        datasets: [{
+            label: 'Unidades Vendidas',
+            data: [120, 135, 110, 95, 180, 75, 210, 190, 205],
+            backgroundColor: [
+                '#6497b1','#6497b1','#6497b1','#6497b1','#6497b1',
+                '#ffd700','#ffd700','#ffd700','#ffd700'
+            ]
+        }]
+    },
+    options: {
+        plugins: { legend: { display: false } },
+        scales: {
+            y: { beginAtZero: true, title: { display:true, text:'Unidades' } },
+            x: { title: { display:true, text:'Ensaladas' } }
+        }
+    }
+});
+</script>
+
+</body>
+</html>

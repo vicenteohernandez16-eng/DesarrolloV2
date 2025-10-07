@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>B25: Seguimiento Pedido</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://images.unsplash.com/photo-1615485296316-5c2b8b88b8c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    background-color: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+    width: 350px;
+  }
+  button {
+    background-color: #16a085;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:hover { background-color: #1abc9c; }
+  .estado { margin-top: 15px; font-weight: bold; }
+  a { color: #16a085; text-decoration: none; margin-top: 15px; display: inline-block; }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h3>Seguimiento del Pedido</h3>
+  <button id="actualizar">Actualizar Estado</button>
+  <p id="estado" class="estado"></p>
+  <a href="index.html">Volver al inicio</a>
+</div>
+
+<script>
+const estado = document.getElementById('estado');
+document.getElementById('actualizar').addEventListener('click', () => {
+  const estados = ["En preparación 🍳", "Enviado 🚚", "Entregado ✅"];
+  const actual = estados[Math.floor(Math.random() * estados.length)];
+  estado.textContent = `Estado actual: ${actual}`;
+});
+</script>
+</body>
+</html>

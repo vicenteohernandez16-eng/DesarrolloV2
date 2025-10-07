@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>B27: Disponibilidad Ingredientes</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    background-color: rgba(255,255,255,0.95);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+    width: 400px;
+  }
+  button {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 8px;
+    width: 45%;
+    border-radius: 5px;
+    margin: 5px;
+  }
+  button:hover { opacity: 0.9; }
+  .listado { margin-top: 15px; }
+  .agotado { color: red; text-decoration: line-through; }
+  a { display: inline-block; margin-top: 15px; color: #27ae60; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h3>Disponibilidad de Ingredientes</h3>
+  <div class="listado">
+    <p id="tomate">Tomate 🍅</p>
+    <p id="lechuga">Lechuga 🥬</p>
+  </div>
+  <button onclick="deshabilitar('tomate')">Deshabilitar Tomate</button>
+  <button onclick="habilitar('tomate')">Habilitar Tomate</button>
+  <br>
+  <button onclick="deshabilitar('lechuga')">Deshabilitar Lechuga</button>
+  <button onclick="habilitar('lechuga')">Habilitar Lechuga</button>
+  <a href="index.html">Volver al inicio</a>
+</div>
+
+<script>
+function deshabilitar(id){
+  document.getElementById(id).className = "agotado";
+}
+function habilitar(id){
+  document.getElementById(id).className = "";
+}
+</script>
+</body>
+</html>
