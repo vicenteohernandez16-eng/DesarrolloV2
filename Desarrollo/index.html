@@ -134,6 +134,19 @@
         <button onclick="addToCart('Ensalada_Tropical',14800)">Agregar al carrito</button>
       </div>
     </div>
+
+    <!-- Ensalada Brasileña agotada -->
+    <div class="producto">
+      <img src="https://www.cardamomo.news/__export/1702497985313/sites/debate/img/2023/12/13/ensalada_brasilena_de_zanahoria_1.png_673822677.png"
+           alt="Ensalada Brasileña"
+           style="filter: grayscale(100%);">
+      <div class="producto-info">
+        <h3>Ensalada Brasileña</h3>
+        <p>$9.900</p>
+        <p style="color:red; font-weight:bold; font-size:1.1em;">Agotado</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -174,9 +187,7 @@
   <p>📞 +569 64419067 | 📍 Buin, Av. José Manuel Balmaceda 318 | ✉ aguantenlasverduras@gmail.com</p>
 </footer>
 
-
 <script>
-  // Perfil
   const perfilBtn = document.getElementById('perfil-btn');
   const perfilMenu = document.getElementById('perfil-menu');
   perfilBtn.addEventListener('click', () => {
@@ -186,7 +197,6 @@
     if(!perfilBtn.contains(e.target)) perfilMenu.style.display='none';
   });
 
-  // Carrito
   const carritoHeader = document.getElementById('carrito');
   const carritoDetalle = document.getElementById('carrito-detalle');
 
@@ -253,4 +263,3 @@
 
 </body>
 </html>
-
